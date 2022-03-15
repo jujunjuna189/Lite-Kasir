@@ -6,13 +6,12 @@ class Kasir extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Models', 'model');
+        $this->load->model('Models', 'models');
     }
 	
 	public function index()
 	{
         $this->load->view('layouts/header');
-        $this->load->view('layouts/preloader');
         $this->load->view('layouts/navbar');
         $this->load->view('layouts/sidebar');
 		$this->load->view('kasir/index');

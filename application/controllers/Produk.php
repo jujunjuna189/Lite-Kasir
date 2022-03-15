@@ -23,10 +23,24 @@ class Produk extends CI_Controller {
 		$data['no'] = 1;
 
         $this->load->view('layouts/header');
-        $this->load->view('layouts/preloader');
         $this->load->view('layouts/navbar');
         $this->load->view('layouts/sidebar');
 		$this->load->view('master/produk/index', $data);
         $this->load->view('layouts/footer', $footer);
+	}
+
+    function create()
+	{
+		$data = array(
+			'nama'			=>	$this->input->post('nama'),
+			'kuantitas'		=>	$this->input->post('kuantitas'),
+			'harga_jual'	=>	$this->input->post('harga_jual'),
+			'harga_beli'	=> 	$this->input->post('harga_beli'),
+			'id_owner'		=> 	$this->input->post('id_owner')
+		);
+
+		$this->models->Save($data, 'produk');
+
+		redirect('Produk');
 	}
 }

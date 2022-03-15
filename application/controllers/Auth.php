@@ -36,7 +36,10 @@ class Auth extends CI_Controller {
             $this->session->set_userdata($data);
             redirect('Kasir');
         }else{
-            redirect('Auth/login');
+            $flash['message'] = 'Login failed, Cek username dan password !!';
+            $flash['status'] = 'info';
+            $this->session->set_flashdata('flash', $flash);
+            redirect('Auth');
         }
     }
 }

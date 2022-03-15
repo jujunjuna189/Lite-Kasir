@@ -21,6 +21,7 @@
                             <th>Harga Jual</th>
                             <th>Margin</th>
                             <th>Owner</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,10 @@
                                 <td><?= $this->globalModel->format_currentcy($val->harga_jual) ?></td>
                                 <td><?= $this->globalModel->format_currentcy(($val->harga_jual - $val->harga_beli)) ?></td>
                                 <td><?= $this->models->Get_Where(['id' => $val->id_owner], 'owner')[0]->nama_owner ?></td>
+                                <td>
+                                    <span class="badge badge-warning" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
+                                    <a href="#" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -82,11 +87,16 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button type="submit" class="btn btn-success" id="modal-button">Create</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button type="submit" class="btn btn-primary" id="modal-button">Create</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
 <!--Modal-->
+
+<!-- Data send to javascript -->
+<script>
+    let data_produk = <?= json_encode($produk) ?>;
+</script>

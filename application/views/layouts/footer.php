@@ -52,6 +52,9 @@
 <!-- daterangepicker -->
 <script src="<?= base_url('assets') ?>/plugins/moment/moment.min.js"></script>
 <script src="<?= base_url('assets') ?>/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Modal & Alert -->
+<script src="<?= base_url('assets') ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?= base_url('assets') ?>/plugins/toastr/toastr.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="<?= base_url('assets') ?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->

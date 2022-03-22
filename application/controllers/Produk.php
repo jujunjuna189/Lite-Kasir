@@ -29,7 +29,7 @@ class Produk extends CI_Controller {
         $this->load->view('layouts/footer', $footer);
 	}
 
-    function create()
+    public function create()
 	{
 		$data = array(
 			'nama'			=>	$this->input->post('nama'),
@@ -40,6 +40,22 @@ class Produk extends CI_Controller {
 		);
 
 		$this->models->Save($data, 'produk');
+
+		redirect('Produk');
+	}
+
+	public function update()
+	{
+		$data = array(
+			'nama'			=>	$this->input->post('nama'),
+			'kuantitas'		=>	$this->input->post('kuantitas'),
+			'harga_jual'	=>	$this->input->post('harga_jual'),
+			'harga_beli'	=> 	$this->input->post('harga_beli'),
+			'id_owner'		=> 	$this->input->post('id_owner')
+		);
+
+		$where['id'] = $this->input->post('id');
+		$this->models->Update($where, $data, 'produk');
 
 		redirect('Produk');
 	}

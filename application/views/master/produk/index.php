@@ -35,8 +35,8 @@
                                 <td><?= $this->globalModel->format_currentcy(($val->harga_jual - $val->harga_beli)) ?></td>
                                 <td><?= $this->models->Get_Where(['id' => $val->id_owner], 'owner')[0]->nama_owner ?></td>
                                 <td>
-                                    <span class="badge badge-warning" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
-                                    <a href="#" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
+                                    <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
+                                    <a href="#" class="badge badge-danger py-2"><i class="fas fa-trash"></i> Delete</a>
                                 </td>
                             </tr>
                         <?php } ?>

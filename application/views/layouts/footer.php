@@ -30,6 +30,8 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?= base_url('assets') ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select 2 -->
+<script src="<?= base_url('assets') ?>/plugins/select2/js/select2.full.min.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="<?= base_url('assets') ?>/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('assets') ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

@@ -56,8 +56,11 @@ const create = () => {
 	$("#Modal").modal("show");
 
 	$('[name="id"]').val("");
-	$('[name="nama_owner"]').val("");
-	$('[name="status"]').val("");
+	$('[name="nama"]').val("");
+	$('[name="username"]').val("");
+	$('[name="password"]').val("");
+	$('[name="akses"]').val("Kasir");
+	$('[name="password"]').nextAll().remove();
 
 	$("#modal-header").html('<i class="fa fa-plus mr-2"></i> Create');
 	$("#modal-body-update-or-create").removeClass("hidden");
@@ -67,7 +70,7 @@ const create = () => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-primary");
 
-	$("#form-item").attr("action", base_url + "Owner/create");
+	$("#form-item").attr("action", base_url + "User/create");
 };
 
 const update = (id) => {
@@ -81,17 +84,21 @@ const update = (id) => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-warning");
 
-	let data = data_owner.find((x) => x.id == id);
+	let data = data_user.find((x) => x.id == id);
 
 	var id = data.id;
-	var nama_owner = data.nama_owner;
-	var status = data.status;
+	var nama = data.nama;
+	var username = data.username;
+    var akses = data.akses;
 
 	$('[name="id"]').val(id);
-	$('[name="nama_owner"]').val(nama_owner);
-	$('[name="status"]').val(status);
+	$('[name="nama"]').val(nama);
+	$('[name="username"]').val(username);
+    $('[name="password"]').nextAll().remove();
+    $('[name="password"]').after('<small>Kosongkan jika tidak ingin di update</small>');
+    $('[name="akses"]').val(akses);
 
-	$("#form-item").attr("action", base_url + "Owner/update");
+	$("#form-item").attr("action", base_url + "User/update");
 };
 
 const delete_ = (id) => {
@@ -101,5 +108,5 @@ const delete_ = (id) => {
     $("#Modal-delete #modal-button").addClass("btn-danger");
     $("#Modal-delete #modal-button").html("Hapus");
 
-    $("#form-delete").attr("action", base_url + "Owner/delete?id=" + id);
+    $("#form-delete").attr("action", base_url + "User/delete?id=" + id);
 };

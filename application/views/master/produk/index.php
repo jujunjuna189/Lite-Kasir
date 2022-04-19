@@ -33,10 +33,10 @@
                                 <td><?= $this->globalModel->format_currentcy($val->harga_beli) ?></td>
                                 <td><?= $this->globalModel->format_currentcy($val->harga_jual) ?></td>
                                 <td><?= $this->globalModel->format_currentcy(($val->harga_jual - $val->harga_beli)) ?></td>
-                                <td><?= $this->models->Get_Where(['id' => $val->id_owner], 'owner')[0]->nama_owner ?></td>
+                                <td><?= isset($this->models->Get_Where(['id' => $val->id_owner], 'owner')[0]->nama_owner) ? $this->models->Get_Where(['id' => $val->id_owner], 'owner')[0]->nama_owner : '-' ?></td>
                                 <td>
                                     <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
-                                    <a href="#" class="badge badge-danger py-2"><i class="fas fa-trash"></i> Delete</a>
+                                    <span class="badge badge-danger py-2 cursor-pointer" onclick="delete_('<?= $val->id ?>')"><i class="fas fa-trash"></i> Delete</span>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -84,6 +84,30 @@
                                 <?php } ?>
                             </select>
                         </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button type="submit" class="btn btn-primary" id="modal-button">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- modal delete -->
+<form name="form" action="" method="post" enctype="multipart/form-data" accept-charset="UTF-8" id="form-delete">
+    <div id="Modal-delete" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align:center">
+                    <h5 id="modal-header">Hapus Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id">
+                    <div id="modal-body-update-or-create">
+                        <h6>Apakah anda yakin ingin menghapus data ini ?</h6>
                     </div>
                 </div>
                 <div class="modal-footer">

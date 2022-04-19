@@ -54,4 +54,13 @@ class Owner extends CI_Controller {
 
 		redirect('Owner');
 	}
+
+    public function delete()
+	{
+
+		$where['id'] = $this->input->get('id');
+		$this->models->Delete($where, 'owner');
+
+		redirect('Owner');
+	}
 }

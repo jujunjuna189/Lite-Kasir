@@ -120,3 +120,13 @@ const update = (id) => {
 
 	$("#form-item").attr("action", base_url + "Produk/update");
 };
+
+const delete_ = (id) => {
+    $("#Modal-delete").modal("show");
+    $("#Modal-delete .modal-header").html("Hapus Data");
+    $("#Modal-delete .modal-body").html("Apakah anda yakin ingin mangahapus data ini ?");
+    $("#Modal-delete #modal-button").addClass("btn-danger");
+    $("#Modal-delete #modal-button").html("Hapus");
+
+    $("#form-delete").attr("action", base_url + "Produk/delete?id=" + id);
+};

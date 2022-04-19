@@ -15,17 +15,19 @@
                     <thead>
                         <tr>
                             <th>NO</th>
-                            <th>Nama Owner</th>
+                            <th>Nama</th>
+                            <th>Username</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($owner as $val) { ?>
+                        <?php foreach ($user as $val) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $val->nama_owner ?></td>
-                                <td><?= $val->status ?></td>
+                                <td><?= $val->nama ?></td>
+                                <td><?= $val->username ?></td>
+                                <td><?= $val->akses ?></td>
                                 <td>
                                     <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
                                     <span class="badge badge-danger py-2 cursor-pointer" onclick="delete_('<?= $val->id ?>')"><i class="fas fa-trash"></i> Delete</span>
@@ -52,12 +54,23 @@
                     <input type="hidden" name="id">
                     <div id="modal-body-update-or-create">
                         <div class="form-group">
-                            <small><strong>Nama Owner</strong></small>
-                            <input type="text" name="nama_owner" class="form-control" required placeholder="Nama Owner">
+                            <small><strong>Nama Lengkap</strong></small>
+                            <input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap">
                         </div>
                         <div class="form-group">
-                            <small><strong>Status</strong></small>
-                            <input type="text" name="status" class="form-control" required placeholder="Status">
+                            <small><strong>Username</strong></small>
+                            <input type="text" name="username" class="form-control" required placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <small><strong>Password</strong></small>
+                            <input type="text" name="password" class="form-control" required placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <small><strong>Akses</strong></small>
+                            <select name="akses" id="akses" class="form-control">
+                                <option value="Admin">Admin</option>
+                                <option value="Kasir">Kasir</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -96,5 +109,5 @@
 
 <!-- Data send to javascript -->
 <script>
-    let data_owner = <?= json_encode($owner) ?>;
+    let data_user = <?= json_encode($user) ?>;
 </script>

@@ -59,4 +59,13 @@ class Produk extends CI_Controller {
 
 		redirect('Produk');
 	}
+
+	public function delete()
+	{
+
+		$where['id'] = $this->input->get('id');
+		$this->models->Delete($where, 'produk');
+
+		redirect('Produk');
+	}
 }

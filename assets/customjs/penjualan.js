@@ -3,6 +3,7 @@ $(function () {
 		code: false,
 		input: true,
 		search: true,
+		dropdownParent: $("#Modal"),
 	});
 
 	$("#example1")
@@ -15,7 +16,70 @@ $(function () {
 		.buttons()
 		.container()
 		.appendTo("#example1_wrapper .col-md-6:eq(0)");
+
+	$("#Modal select[name='produk']").on("change", function () {
+		let harga = data_produk.find((x) => x.id == $(this).val()).harga_jual;
+		$("#Modal input[name='harga']").val(harga);
+	});
+
+	let draf_produk = [];
+
+	$("#Modal input[name='qty']").on("keypress", function (e) {
+		if (e.which == 13) {
+			if ($("#Modal select[name='produk']").val() != null) {
+				let id_produk = $("#Modal select[name='produk']").val();
+				let produk = data_produk.find((x) => x.id == id_produk);
+
+				produk = {
+					...produk,
+					qty: $(this).val(),
+				};
+
+				let indexDraf = draf_produk.findIndex((x) => x.id == produk.id);
+
+				if (indexDraf < 0) {
+					draf_produk.push(produk);
+				} else {
+					let finalQty =
+						parseInt(draf_produk[indexDraf].qty) + parseInt($(this).val());
+					draf_produk[indexDraf]["qty"] = finalQty;
+				}
+
+				setDrawDraf(draf_produk);
+			}
+		}
+	});
 });
+
+const setDrawDraf = (array) => {
+	// View
+	let total = 0;
+	$("#produk-list-draf").empty();
+	$.each(array, function (i, row) {
+		total += row.harga_jual * row.qty;
+		let view =
+			"<tr>" +
+			"<td>" +
+			row.nama +
+			"</td>" +
+			"<td>" +
+			row.harga_jual +
+			"</td>" +
+			"<td>" +
+			row.qty +
+			"</td>" +
+			"<td>" +
+			row.harga_jual * row.qty +
+			"</td>" +
+			'<td><span class="badge cursor-pointer p-2"><i class="fa fa-trash"></i></span></td>' +
+			"</tr>";
+		$("#produk-list-draf").prepend(view);
+	});
+
+	let view =
+		'<tr><th colspan="3">Total</th><th colspan="2">' + total + "</th></tr>";
+	$("#produk-list-draf").append(view);
+};
 
 // Data table end....
 // Data const
@@ -55,7 +119,7 @@ const create = () => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-primary");
 
-	$("#form-item").attr("action", base_url + "Produk/create");
+	// $("#form-item").attr("action", base_url + "Produk/create");
 };
 
 const update = (id) => {
@@ -85,5 +149,5 @@ const update = (id) => {
 	$('[name="harga_jual"]').val(harga_jual);
 	$('[name="id_owner"]').val(id_owner);
 
-	$("#form-item").attr("action", base_url + "Produk/update");
+	// $("#form-item").attr("action", base_url + "Produk/update");
 };

@@ -15,25 +15,19 @@
                     <thead>
                         <tr>
                             <th>NO</th>
-                            <th>Nama Produk</th>
-                            <th>Kuantitas</th>
-                            <th>Harga Beli</th>
-                            <th>Harga Jual</th>
-                            <th>Margin</th>
-                            <th>Owner</th>
+                            <th>Nama</th>
+                            <th>Username</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($produk as $val) { ?>
+                        <?php foreach ($user as $val) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $val->nama ?></td>
-                                <td><?= $val->kuantitas ?></td>
-                                <td><?= $this->globalModel->format_currentcy($val->harga_beli) ?></td>
-                                <td><?= $this->globalModel->format_currentcy($val->harga_jual) ?></td>
-                                <td><?= $this->globalModel->format_currentcy(($val->harga_jual - $val->harga_beli)) ?></td>
-                                <td><?= isset($this->models->Get_Where(['id' => $val->id_owner], 'owner')[0]->nama_owner) ? $this->models->Get_Where(['id' => $val->id_owner], 'owner')[0]->nama_owner : '-' ?></td>
+                                <td><?= $val->username ?></td>
+                                <td><?= $val->akses ?></td>
                                 <td>
                                     <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
                                     <span class="badge badge-danger py-2 cursor-pointer" onclick="delete_('<?= $val->id ?>')"><i class="fas fa-trash"></i> Delete</span>
@@ -60,28 +54,22 @@
                     <input type="hidden" name="id">
                     <div id="modal-body-update-or-create">
                         <div class="form-group">
-                            <small><strong>Nama Produk</strong></small>
-                            <input type="text" name="nama" class="form-control" required placeholder="Nama Produk">
+                            <small><strong>Nama Lengkap</strong></small>
+                            <input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap">
                         </div>
                         <div class="form-group">
-                            <small><strong>Kuantitas</strong></small>
-                            <input type="number" name="kuantitas" class="form-control" required placeholder="Kuantitas">
+                            <small><strong>Username</strong></small>
+                            <input type="text" name="username" class="form-control" required placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <small><strong>Harga Beli</strong></small>
-                            <input type="text" name="harga_beli" class="form-control" required placeholder="Harga Beli">
+                            <small><strong>Password</strong></small>
+                            <input type="text" name="password" class="form-control" required placeholder="Password">
                         </div>
                         <div class="form-group">
-                            <small><strong>Harga Jual</strong></small>
-                            <input type="text" name="harga_jual" class="form-control" required placeholder="Harga Jual">
-                        </div>
-                        <div class="form-group">
-                            <small><strong>Owner</strong></small>
-                            <select name="id_owner" id="id_owner" class="form-control" required>
-                                <option value="" selected disabled>-- Pilih Owner --</option>
-                                <?php foreach ($owner as $val) { ?>
-                                    <option value="<?= $val->id ?>"><?= $val->nama_owner ?></option>
-                                <?php } ?>
+                            <small><strong>Akses</strong></small>
+                            <select name="akses" id="akses" class="form-control">
+                                <option value="Admin">Admin</option>
+                                <option value="Kasir">Kasir</option>
                             </select>
                         </div>
                     </div>
@@ -94,7 +82,6 @@
         </div>
     </div>
 </form>
-
 <!-- modal delete -->
 <form name="form" action="" method="post" enctype="multipart/form-data" accept-charset="UTF-8" id="form-delete">
     <div id="Modal-delete" class="modal fade" tabindex="-1">
@@ -122,5 +109,5 @@
 
 <!-- Data send to javascript -->
 <script>
-    let data_produk = <?= json_encode($produk) ?>;
+    let data_user = <?= json_encode($user) ?>;
 </script>

@@ -44,24 +44,6 @@ $(document).ready(function () {
 
 		document.form.action = "<?php echo base_url(); ?>Kasir/Create1";
 	});
-
-	$(document).on("click", "#btn-delete", function () {
-		$("#Modal").modal("show");
-		$("#modal-button").html("Delete");
-		$("#modal-button").removeClass("btn-success");
-		$("#modal-button").addClass("btn-danger");
-		$("#modal-body-update-or-create").addClass("hidden");
-		$("#modal-body-delete").removeClass("hidden");
-		$("#modal-header").html('<i class="fa fa-trash"></i> Delete');
-
-		var id = $(this).data("id");
-		var nama = $(this).data("nama");
-
-		$('[name="id"]').val(id);
-		$("#name-delete").html(text);
-
-		document.form.action = "<?php echo base_url(); ?>Crud/Delete1";
-	});
 });
 
 const remove_color_btn = () => {
@@ -75,10 +57,10 @@ const create = () => {
 
 	$('[name="id"]').val("");
 	$('[name="nama"]').val("");
-	$('[name="kuantitas"]').val("");
-	$('[name="harga_beli"]').val("");
-	$('[name="harga_jual"]').val("");
-	$('[name="id_owner"]').val("");
+	$('[name="username"]').val("");
+	$('[name="password"]').val("");
+	$('[name="akses"]').val("Kasir");
+	$('[name="password"]').nextAll().remove();
 
 	$("#modal-header").html('<i class="fa fa-plus mr-2"></i> Create');
 	$("#modal-body-update-or-create").removeClass("hidden");
@@ -88,7 +70,7 @@ const create = () => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-primary");
 
-	$("#form-item").attr("action", base_url + "Produk/create");
+	$("#form-item").attr("action", base_url + "User/create");
 };
 
 const update = (id) => {
@@ -102,23 +84,21 @@ const update = (id) => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-warning");
 
-	let data = data_produk.find((x) => x.id == id);
+	let data = data_user.find((x) => x.id == id);
 
 	var id = data.id;
 	var nama = data.nama;
-	var kuantitas = data.kuantitas;
-	var harga_beli = data.harga_beli;
-	var harga_jual = data.harga_jual;
-	var id_owner = data.id_owner;
+	var username = data.username;
+    var akses = data.akses;
 
 	$('[name="id"]').val(id);
 	$('[name="nama"]').val(nama);
-	$('[name="kuantitas"]').val(kuantitas);
-	$('[name="harga_beli"]').val(harga_beli);
-	$('[name="harga_jual"]').val(harga_jual);
-	$('[name="id_owner"]').val(id_owner);
+	$('[name="username"]').val(username);
+    $('[name="password"]').nextAll().remove();
+    $('[name="password"]').after('<small>Kosongkan jika tidak ingin di update</small>');
+    $('[name="akses"]').val(akses);
 
-	$("#form-item").attr("action", base_url + "Produk/update");
+	$("#form-item").attr("action", base_url + "User/update");
 };
 
 const delete_ = (id) => {
@@ -128,5 +108,5 @@ const delete_ = (id) => {
     $("#Modal-delete #modal-button").addClass("btn-danger");
     $("#Modal-delete #modal-button").html("Hapus");
 
-    $("#form-delete").attr("action", base_url + "Produk/delete?id=" + id);
+    $("#form-delete").attr("action", base_url + "User/delete?id=" + id);
 };

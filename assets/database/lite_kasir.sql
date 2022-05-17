@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2022 at 02:31 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.13
+-- Generation Time: May 17, 2022 at 11:27 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,8 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `customer` (
-  `id` bigint(20) NOT NULL
+  `id` bigint(20) NOT NULL,
+  `nama_customer` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `nama_customer`) VALUES
+(1, 'mahasiswa'),
+(2, 'Jun');
 
 -- --------------------------------------------------------
 
@@ -38,8 +47,8 @@ CREATE TABLE `customer` (
 --
 
 CREATE TABLE `dt_penjualan` (
-  `id` varchar(14) NOT NULL,
-  `id_produk` int(11) NOT NULL,
+  `id` bigint(14) NOT NULL,
+  `id_produk` bigint(11) NOT NULL,
   `nama_produk` varchar(50) NOT NULL,
   `harga_beli` float NOT NULL,
   `harga_jual` float NOT NULL,
@@ -51,7 +60,7 @@ CREATE TABLE `dt_penjualan` (
 --
 
 INSERT INTO `dt_penjualan` (`id`, `id_produk`, `nama_produk`, `harga_beli`, `harga_jual`, `kuantitas`) VALUES
-('1', 1, 'Roti', 5000, 7000, 0);
+(1, 1, 'Roti', 5000, 7000, 0);
 
 -- --------------------------------------------------------
 
@@ -60,8 +69,20 @@ INSERT INTO `dt_penjualan` (`id`, `id_produk`, `nama_produk`, `harga_beli`, `har
 --
 
 CREATE TABLE `ht_penjualan` (
-  `id` bigint(20) NOT NULL
+  `id` bigint(20) NOT NULL,
+  `id_customer` int(11) NOT NULL,
+  `nama_customer` varchar(50) NOT NULL,
+  `waktu` datetime NOT NULL,
+  `total_bayar` float NOT NULL,
+  `kasir` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ht_penjualan`
+--
+
+INSERT INTO `ht_penjualan` (`id`, `id_customer`, `nama_customer`, `waktu`, `total_bayar`, `kasir`) VALUES
+(1, 1, 'mahasiswa', '2022-03-23 14:37:18', 1222, 'jaka');
 
 -- --------------------------------------------------------
 
@@ -70,7 +91,7 @@ CREATE TABLE `ht_penjualan` (
 --
 
 CREATE TABLE `owner` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `nama_owner` varchar(50) NOT NULL,
   `status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -90,20 +111,14 @@ INSERT INTO `owner` (`id`, `nama_owner`, `status`) VALUES
 --
 
 CREATE TABLE `penjualan` (
-  `id` varchar(14) NOT NULL,
-  `id_customer` int(11) NOT NULL,
-  `nama_customer` varchar(50) NOT NULL,
-  `waktu` datetime NOT NULL,
-  `total_bayar` float NOT NULL,
-  `kasir` varchar(50) NOT NULL
+  `id` bigint(20) NOT NULL,
+  `id_produk` bigint(20) NOT NULL,
+  `nama_produk` varchar(255) NOT NULL,
+  `harga_beli` int(11) NOT NULL,
+  `harga_jual` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `penjualan`
---
-
-INSERT INTO `penjualan` (`id`, `id_customer`, `nama_customer`, `waktu`, `total_bayar`, `kasir`) VALUES
-('1', 1, 'mahasiswa', '2022-03-23 14:37:18', 1222, 'jaka');
 
 -- --------------------------------------------------------
 
@@ -112,8 +127,8 @@ INSERT INTO `penjualan` (`id`, `id_customer`, `nama_customer`, `waktu`, `total_b
 --
 
 CREATE TABLE `produk` (
-  `id` int(11) NOT NULL,
-  `id_owner` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
+  `id_owner` bigint(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `kuantitas` int(3) NOT NULL,
   `harga_jual` float NOT NULL,
@@ -125,7 +140,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `id_owner`, `nama`, `kuantitas`, `harga_jual`, `harga_beli`) VALUES
-(1, 1, 'Ilham Jaya Kusumah', 20, 20000, 25000),
+(1, 1, 'Hp', 20, 20000, 25000),
 (4, 3, 'Komputer', 26, 4000000, 2000000);
 
 -- --------------------------------------------------------
@@ -147,8 +162,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nama`, `akses`) VALUES
-(0, 'juna', '09a4b07cc37f30fb0538a6057c2e51a3', 'Juna', 'Kasir'),
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin');
+(1, 'juna', '09a4b07cc37f30fb0538a6057c2e51a3', 'Juna', 'Kasir'),
+(2, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -158,6 +173,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `nama`, `akses`) VALUES
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dt_penjualan`
+--
+ALTER TABLE `dt_penjualan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -195,16 +216,40 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `dt_penjualan`
+--
+ALTER TABLE `dt_penjualan`
+  MODIFY `id` bigint(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ht_penjualan`
+--
+ALTER TABLE `ht_penjualan`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `owner`
 --
 ALTER TABLE `owner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `penjualan`
+--
+ALTER TABLE `penjualan`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

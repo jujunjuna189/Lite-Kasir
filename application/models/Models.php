@@ -13,8 +13,22 @@ class Models extends CI_Model{
 		$query = $this->db->get_where($table, $where);
 		return $query->result();
 	}
+	public function getLastData($table, $order)
+	{
+		$this->db->select('*');
+		$this->db->from($table);
+		$this->db->order_by($order, 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get()->row();
+		return $query;
+	}
 	function Save($data, $table){
 		$result=$this->db->insert($table, $data);
+		return $result;
+	}
+	function saveBatch($dataBatch, $table)
+	{
+		$result=$this->db->insert_batch($table, $dataBatch);
 		return $result;
 	}
 	function Update($where, $data, $table){

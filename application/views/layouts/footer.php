@@ -68,6 +68,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="<?= base_url('assets') ?>/dist/js/pages/dashboard.js"></script> -->
 <!-- Send Data -->
+<script src="<?= base_url() ?>assets/customjs/global.js"></script>
 <script>
     let base_url = '<?= base_url() ?>';
 </script>

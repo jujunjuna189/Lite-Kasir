@@ -106,21 +106,25 @@ const form_on_submit = (e) => {
 
 const getDataForm = () => {
 	var id_customer = $('[name="customer"]').select2().val();
+	var date = new Date();
+	var dateNow = date.getFullYear() + '-' + setZeroNumber((date.getMonth() + 1)) + '-' + setZeroNumber(date.getDate()) + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 	var nama_customer = data_customer.find(
 		(x) => x.id == id_customer
 	).nama_customer;
 
-	var total_harga = 0;
+	var total_bayar = 0;
 	$.each(draf_produk, function (i, row) {
-		total_harga =
-			parseInt(row.harga_jual) * parseInt(row.qty) + parseInt(total_harga);
+		total_bayar =
+			parseInt(row.harga_jual) * parseInt(row.qty) + parseInt(total_bayar);
 	});
 
 	let data = {
 		id_customer: id_customer,
 		nama_customer: nama_customer,
-		total_harga: total_harga,
+		total_bayar: total_bayar,
+		waktu: dateNow,
 		data_produk: draf_produk,
+		kasir: 'Admin',
 	};
 
 	return data;
@@ -147,7 +151,28 @@ const create = () => {
 
 const upload = (e) => {
 	e.preventDefault();
-	console.log(getDataForm());
+	let dataUpload = getDataForm();
+
+	let customer = $('[name="customer"]').val();
+	let produk = $('[name="produk"]').val();
+	let qty = $('[name="qty"]').val();
+
+	// Validasi
+	if(customer != "" && produk != "" && qty != ""){
+		$.ajax({
+			url: base_url + "Transaksi/create",
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				data: dataUpload
+			},
+			success: function(response){
+				location.reload();
+			}
+		});
+	}else{
+		alert("Cek data kembali");
+	}
 };
 
 const update = (id) => {
@@ -182,5 +207,5 @@ const delete_ = (id) => {
 	$("#Modal-delete #modal-button").addClass("btn-danger");
 	$("#Modal-delete #modal-button").html("Hapus");
 
-	$("#form-delete").attr("action", base_url + "Produk/delete?id=" + id);
+	$("#form-delete").attr("action", base_url + "Transaksi/delete?id=" + id);
 };

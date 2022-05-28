@@ -1,3 +1,4 @@
+let draf_produk = [];
 $(function () {
 	$(".select2").select2({
 		code: false,
@@ -21,8 +22,6 @@ $(function () {
 		let harga = data_produk.find((x) => x.id == $(this).val()).harga_jual;
 		$("#Modal input[name='harga']").val(harga);
 	});
-
-	let draf_produk = [];
 
 	$("#Modal input[name='qty']").on("keypress", function (e) {
 		if (e.which == 13) {
@@ -71,7 +70,9 @@ const setDrawDraf = (array) => {
 			"<td>" +
 			row.harga_jual * row.qty +
 			"</td>" +
-			'<td><span class="badge cursor-pointer p-2"><i class="fa fa-trash"></i></span></td>' +
+			'<td><span class="badge cursor-pointer p-2" onclick="remove_draf(\'' +
+			row.id +
+			'\')"><i class="fa fa-trash"></i></span></td>' +
 			"</tr>";
 		$("#produk-list-draf").prepend(view);
 	});
@@ -79,6 +80,12 @@ const setDrawDraf = (array) => {
 	let view =
 		'<tr><th colspan="3">Total</th><th colspan="2">' + total + "</th></tr>";
 	$("#produk-list-draf").append(view);
+};
+
+const remove_draf = (id) => {
+	let filterDraf = draf_produk.filter((x) => x.id != id);
+	draf_produk = filterDraf;
+	setDrawDraf(draf_produk);
 };
 
 // Data table end....
@@ -97,57 +104,83 @@ const form_on_submit = (e) => {
 	console.log("Ok");
 };
 
-const on_key_down = () => {
-	console.log("Ok Key Down");
+const getDataForm = () => {
+	var id_customer = $('[name="customer"]').select2().val();
+	var nama_customer = data_customer.find(
+		(x) => x.id == id_customer
+	).nama_customer;
+
+	var total_harga = 0;
+	$.each(draf_produk, function (i, row) {
+		total_harga =
+			parseInt(row.harga_jual) * parseInt(row.qty) + parseInt(total_harga);
+	});
+
+	let data = {
+		id_customer: id_customer,
+		nama_customer: nama_customer,
+		total_harga: total_harga,
+		data_produk: draf_produk,
+	};
+
+	return data;
 };
 
 const create = () => {
 	$("#Modal").modal("show");
 
 	$('[name="id"]').val("");
-	$('[name="nama"]').val("");
-	$('[name="kuantitas"]').val("");
-	$('[name="harga_beli"]').val("");
-	$('[name="harga_jual"]').val("");
-	$('[name="id_owner"]').val("");
+	$('[name="customer"]').select2().val("").trigger("change.select2");
+	$('[name="produk"]').select2().val("").trigger("change.select2");
+	$('[name="harga"]').val("");
+	$('[name="qty"]').val("");
 
 	$("#modal-header").html('<i class="fa fa-plus mr-2"></i> Create');
 	$("#modal-body-update-or-create").removeClass("hidden");
-	$('[name="img"]').addClass("hidden");
 	$("#modal-body-delete").addClass("hidden");
 	$("#modal-button").html("Create");
 	remove_color_btn();
 	$("#modal-button").addClass("btn-primary");
 
-	// $("#form-item").attr("action", base_url + "Produk/create");
+	$("#Modal #modal-event").attr("onclick", "upload(event)");
+};
+
+const upload = (e) => {
+	e.preventDefault();
+	console.log(getDataForm());
 };
 
 const update = (id) => {
-	$("#Modal").modal("show");
+	let modalParent = "#Modal";
+	$(modalParent).modal("show");
 
-	$("#modal-header").html('<i class="fa fa-pen"></i> Update');
-	$("#modal-body-update-or-create").removeClass("hidden");
-	$('[name="img"]').removeClass("hidden");
-	$("#modal-body-delete").addClass("hidden");
-	$("#modal-button").html("Update");
+	$(modalParent + " #modal-header").html('<i class="fa fa-pen"></i> Update');
+	$(modalParent + " #modal-body-update-or-create").removeClass("hidden");
+	$(modalParent + ' [name="img"]').removeClass("hidden");
+	$(modalParent + " #modal-body-delete").addClass("hidden");
+	$(modalParent + " #modal-button").html("Update");
 	remove_color_btn();
-	$("#modal-button").addClass("btn-warning");
+	$(modalParent + " #modal-button").addClass("btn-warning");
 
-	let data = data_produk.find((x) => x.id == id);
+	let data = data_transaksi.find((x) => x.id == id);
 
 	var id = data.id;
-	var nama = data.nama;
-	var kuantitas = data.kuantitas;
-	var harga_beli = data.harga_beli;
-	var harga_jual = data.harga_jual;
-	var id_owner = data.id_owner;
+	var id_customer = data.id_customer;
 
 	$('[name="id"]').val(id);
-	$('[name="nama"]').val(nama);
-	$('[name="kuantitas"]').val(kuantitas);
-	$('[name="harga_beli"]').val(harga_beli);
-	$('[name="harga_jual"]').val(harga_jual);
-	$('[name="id_owner"]').val(id_owner);
+	$('[name="customer"]').select2().val(id_customer).trigger("change.select2");
 
 	// $("#form-item").attr("action", base_url + "Produk/update");
+};
+
+const delete_ = (id) => {
+	$("#Modal-delete").modal("show");
+	$("#Modal-delete .modal-header").html("Hapus Data");
+	$("#Modal-delete .modal-body").html(
+		"Apakah anda yakin ingin mangahapus data ini ?"
+	);
+	$("#Modal-delete #modal-button").addClass("btn-danger");
+	$("#Modal-delete #modal-button").html("Hapus");
+
+	$("#form-delete").attr("action", base_url + "Produk/delete?id=" + id);
 };

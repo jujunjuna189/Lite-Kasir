@@ -31,8 +31,9 @@
                                 <td><?= date('h:i:s', strtotime($val->waktu)) ?></td>
                                 <td><?= $this->globalModel->format_currentcy($val->total_bayar) ?></td>
                                 <td>
-                                    <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
-                                    <a href="#" class="badge badge-danger py-2"><i class="fas fa-trash"></i> Delete</a>
+                                    <a href="#" class="badge badge-primary py-2"><i class="fas fa-print"></i> Print</a>
+                                    <!-- <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span> -->
+                                    <span class="badge badge-danger py-2 cursor-pointer" onclick="delete_('<?= $val->id ?>')"><i class="fas fa-trash"></i> Delete</span>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -57,16 +58,16 @@
                     <div class="form-group">
                         <small><strong>Customer</strong></small>
                         <select class="form-control select2" name="customer" style="width: 100%;">
-                            <option selected="selected" data-select2-id="0" disabled>Pilih</option>
+                            <option value="" selected disabled>Pilih</option>
                             <?php foreach($customer as $val) : ?>
-                            <option data-select2-id="<?= $val->id ?>"><?= $val->nama_customer ?></option>
+                            <option value="<?= $val->id ?>"><?= $val->nama_customer ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <small><strong>Produk</strong></small>
                         <select class="form-control select2" name="produk" style="width: 100%;">
-                            <option selected="selected" data-select2-id="0" disabled>Pilih</option>
+                            <option value="" selected disabled>Pilih</option>
                             <?php foreach($produk as $val){ ?>
                             <option value="<?= $val->id ?>"><?= $val->nama ?></option>
                             <?php } ?>
@@ -93,11 +94,7 @@
                             </thead>
                             <tbody id="produk-list-draf">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><span class="badge cursor-pointer p-2"><i class="fa fa-trash"></i></span></td>
+                                    <td colspan="5" class="text-center">Belum ada data</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -106,15 +103,41 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button type="button" class="btn btn-primary" id="modal-button">Create</button>
+                <button type="button" class="btn btn-primary" id="modal-event">Create</button>
             </div>
         </div>
     </div>
 </div>
 <!--Modal-->
 
+<!-- modal delete -->
+<form name="form" action="" method="post" enctype="multipart/form-data" accept-charset="UTF-8" id="form-delete">
+    <div id="Modal-delete" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align:center">
+                    <h5 id="modal-header">Hapus Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id">
+                    <div id="modal-body-update-or-create">
+                        <h6>Apakah anda yakin ingin menghapus data ini ?</h6>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button type="submit" class="btn btn-primary" id="modal-button">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Modal-->
+
 <!-- Data send to javascript -->
 <script>
+    let data_customer = <?= json_encode($customer) ?>;
     let data_transaksi = <?= json_encode($transaksi) ?>;
     let data_produk = <?= json_encode($produk) ?>;
 </script>

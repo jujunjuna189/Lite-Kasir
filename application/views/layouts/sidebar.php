@@ -57,6 +57,14 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="<?= base_url() ?>Supplier" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Suplier</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="<?= base_url() ?>User" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>User</p>
@@ -114,9 +122,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="<?= base_url("Laporan/report_filter_re") ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Laporan per produk</p>
+                                <p>Laporan Penjualan RE</p>
                             </a>
                         </li>
                         <li class="nav-item">

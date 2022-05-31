@@ -15,16 +15,16 @@
                     <thead>
                         <tr>
                             <th>NO</th>
-                            <th>Nama Owner</th>
+                            <th>Nama Supplier</th>
                             <th>No Hp</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($owner as $val) { ?>
+                        <?php foreach ($supplier as $val) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $val->nama_owner ?></td>
+                                <td><?= $val->nama_supplier ?></td>
                                 <td><?= $val->no_hp ?></td>
                                 <td>
                                     <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
@@ -52,8 +52,8 @@
                     <input type="hidden" name="id">
                     <div id="modal-body-update-or-create">
                         <div class="form-group">
-                            <small><strong>Nama Owner</strong></small>
-                            <input type="text" name="nama_owner" class="form-control" required placeholder="Nama Owner">
+                            <small><strong>Nama Supplier</strong></small>
+                            <input type="text" name="nama_supplier" class="form-control" required placeholder="Nama Supplier">
                         </div>
                         <div class="form-group">
                             <small><strong>No Telepon</strong></small>
@@ -96,5 +96,5 @@
 
 <!-- Data send to javascript -->
 <script>
-    let data_owner = <?= json_encode($owner) ?>;
+    let data_supplier = <?= json_encode($supplier) ?>;
 </script>

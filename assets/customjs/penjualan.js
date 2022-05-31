@@ -107,7 +107,18 @@ const form_on_submit = (e) => {
 const getDataForm = () => {
 	var id_customer = $('[name="customer"]').select2().val();
 	var date = new Date();
-	var dateNow = date.getFullYear() + '-' + setZeroNumber((date.getMonth() + 1)) + '-' + setZeroNumber(date.getDate()) + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+	var dateNow =
+		date.getFullYear() +
+		"-" +
+		setZeroNumber(date.getMonth() + 1) +
+		"-" +
+		setZeroNumber(date.getDate()) +
+		" " +
+		date.getHours() +
+		":" +
+		date.getMinutes() +
+		":" +
+		date.getSeconds();
 	var nama_customer = data_customer.find(
 		(x) => x.id == id_customer
 	).nama_customer;
@@ -124,7 +135,7 @@ const getDataForm = () => {
 		total_bayar: total_bayar,
 		waktu: dateNow,
 		data_produk: draf_produk,
-		kasir: 'Admin',
+		kasir: "Admin",
 	};
 
 	return data;
@@ -158,19 +169,22 @@ const upload = (e) => {
 	let qty = $('[name="qty"]').val();
 
 	// Validasi
-	if(customer != "" && produk != "" && qty != ""){
+	if (customer != "" && produk != "" && qty != "") {
 		$.ajax({
 			url: base_url + "Transaksi/create",
-			type: 'POST',
-			dataType: 'json',
+			type: "POST",
+			dataType: "json",
 			data: {
-				data: dataUpload
+				data: dataUpload,
 			},
-			success: function(response){
+			success: function (response) {
 				location.reload();
-			}
+			},
+			error: function (response) {
+				console.log(response);
+			},
 		});
-	}else{
+	} else {
 		alert("Cek data kembali");
 	}
 };

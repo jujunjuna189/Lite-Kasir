@@ -31,7 +31,7 @@
                                 <td><?= date('h:i:s', strtotime($val->waktu)) ?></td>
                                 <td><?= $this->globalModel->format_currentcy($val->total_bayar) ?></td>
                                 <td>
-                                    <a href="#" class="badge badge-primary py-2"><i class="fas fa-print"></i> Print</a>
+                                    <a href="<?= base_url("Transaksi/report?id=" . $val->id) ?>" class="badge badge-primary py-2"><i class="fas fa-print"></i> Print</a>
                                     <!-- <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span> -->
                                     <span class="badge badge-danger py-2 cursor-pointer" onclick="delete_('<?= $val->id ?>')"><i class="fas fa-trash"></i> Delete</span>
                                 </td>

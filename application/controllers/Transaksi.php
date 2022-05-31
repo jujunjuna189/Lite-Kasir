@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Transaksi extends CI_Controller {
 
+    private $title = 'Transaksi';
+    private $titleReport = 'Laporan Transaksi';
+
     public function __construct()
     {
         parent::__construct();
@@ -97,5 +100,21 @@ class Transaksi extends CI_Controller {
         // Hapus ht_penjualan
         $this->models->Delete(['id' => $id], 'ht_penjualan');
         redirect('Transaksi/penjualan');
+    }
+
+    public function report()
+    {
+        $id = $this->input->get('id');
+        // Header
+        $header['auth_big_page'] = true;
+        // transaksi
+        $data['title_page'] = $this->titleReport;
+		$data['ht_penjualan'] = $this->models->Get_Where(['id' => $id], 'ht_penjualan');
+        $data['dt_penjualan'] = $this->models->Get_Where(['id_ht_penjualan' => $id], 'dt_penjualan');
+		$data['no'] = 1;
+
+        $this->load->view('layouts/auth/header', $header);
+		$this->load->view('report/transaksi/index', $data);
+        $this->load->view('layouts/auth/footer');
     }
 }

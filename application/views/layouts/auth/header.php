@@ -17,4 +17,4 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('assets') ?>/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition <?= isset($auth_big_page) && $auth_big_page  ? '' : 'login-page' ?>">

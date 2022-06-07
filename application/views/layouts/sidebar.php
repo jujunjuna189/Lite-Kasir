@@ -105,7 +105,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="<?= base_url() ?>Transaksi/pembelian" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pembelian</p>
                             </a>
@@ -124,7 +124,13 @@
                         <li class="nav-item">
                             <a href="<?= base_url("Laporan/report_filter_re") ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Laporan Penjualan RE</p>
+                                <p>Penjualan RE</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url("Laporan/report_filter_owner") ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Penjualan Owner</p>
                             </a>
                         </li>
                         <li class="nav-item">

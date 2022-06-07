@@ -8,4 +8,10 @@ class GlobalModel extends CI_Model
         $value = 'Rp ' . number_format($value, 0, ',', '.');
         return $value;
     }
+
+    public function format_percent($value)
+    {
+        $value = number_format($value, 1, '.', ',') . '%';
+        return $value;
+    }
 }

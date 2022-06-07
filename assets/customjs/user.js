@@ -65,6 +65,7 @@ const create = () => {
 	$("#modal-header").html('<i class="fa fa-plus mr-2"></i> Create');
 	$("#modal-body-update-or-create").removeClass("hidden");
 	$('[name="img"]').addClass("hidden");
+	$('[name="username"]').removeAttr("readonly");
 	$("#modal-body-delete").addClass("hidden");
 	$("#modal-button").html("Create");
 	remove_color_btn();
@@ -79,6 +80,7 @@ const update = (id) => {
 	$("#modal-header").html('<i class="fa fa-pen"></i> Update');
 	$("#modal-body-update-or-create").removeClass("hidden");
 	$('[name="img"]').removeClass("hidden");
+	$('[name="username"]').attr("readonly", true);
 	$("#modal-body-delete").addClass("hidden");
 	$("#modal-button").html("Update");
 	remove_color_btn();
@@ -89,24 +91,28 @@ const update = (id) => {
 	var id = data.id;
 	var nama = data.nama;
 	var username = data.username;
-    var akses = data.akses;
+	var akses = data.akses;
 
 	$('[name="id"]').val(id);
 	$('[name="nama"]').val(nama);
 	$('[name="username"]').val(username);
-    $('[name="password"]').nextAll().remove();
-    $('[name="password"]').after('<small>Kosongkan jika tidak ingin di update</small>');
-    $('[name="akses"]').val(akses);
+	$('[name="password"]').nextAll().remove();
+	$('[name="password"]').after(
+		"<small>Kosongkan jika tidak ingin di update</small>"
+	);
+	$('[name="akses"]').val(akses);
 
 	$("#form-item").attr("action", base_url + "User/update");
 };
 
 const delete_ = (id) => {
-    $("#Modal-delete").modal("show");
-    $("#Modal-delete .modal-header").html("Hapus Data");
-    $("#Modal-delete .modal-body").html("Apakah anda yakin ingin mangahapus data ini ?");
-    $("#Modal-delete #modal-button").addClass("btn-danger");
-    $("#Modal-delete #modal-button").html("Hapus");
+	$("#Modal-delete").modal("show");
+	$("#Modal-delete .modal-header").html("Hapus Data");
+	$("#Modal-delete .modal-body").html(
+		"Apakah anda yakin ingin mangahapus data ini ?"
+	);
+	$("#Modal-delete #modal-button").addClass("btn-danger");
+	$("#Modal-delete #modal-button").html("Hapus");
 
-    $("#form-delete").attr("action", base_url + "User/delete?id=" + id);
+	$("#form-delete").attr("action", base_url + "User/delete?id=" + id);
 };

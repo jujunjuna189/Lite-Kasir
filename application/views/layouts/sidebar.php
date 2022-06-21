@@ -82,6 +82,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="<?= base_url() ?>Kategori" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kategori</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url() ?>Produk" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Produk</p>
@@ -137,6 +143,12 @@
                             <a href="pages/layout/top-nav.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan per priode</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url("Laporan/report_filter_saldo_re") ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Saldo Priode</p>
                             </a>
                         </li>
                     </ul>

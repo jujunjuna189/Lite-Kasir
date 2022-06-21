@@ -33,34 +33,16 @@ $(document).ready(function () {
 		var kuantitas = $(this).data("kuantitas");
 		var harga_jual = $(this).data("harga_jual");
 		var harga_beli = $(this).data("harga_beli");
-		var id_owner = $(this).data("id_owner");
+		var id_supplier = $(this).data("id_supplier");
 
 		$('[name="id"]').val(id);
 		$('[name="nama"]').val(nama);
 		$('[name="kuantitas"]').val(kuantitas);
 		$('[name="harga_jual"]').val(harga_jual);
 		$('[name="harga_beli"]').val(harga_beli);
-		$('[name="id_owner"]').val(id_owner);
+		$('[name="id_supplier"]').val(id_supplier);
 
 		document.form.action = "<?php echo base_url(); ?>Kasir/Create1";
-	});
-
-	$(document).on("click", "#btn-delete", function () {
-		$("#Modal").modal("show");
-		$("#modal-button").html("Delete");
-		$("#modal-button").removeClass("btn-success");
-		$("#modal-button").addClass("btn-danger");
-		$("#modal-body-update-or-create").addClass("hidden");
-		$("#modal-body-delete").removeClass("hidden");
-		$("#modal-header").html('<i class="fa fa-trash"></i> Delete');
-
-		var id = $(this).data("id");
-		var nama = $(this).data("nama");
-
-		$('[name="id"]').val(id);
-		$("#name-delete").html(text);
-
-		document.form.action = "<?php echo base_url(); ?>Crud/Delete1";
 	});
 });
 
@@ -74,12 +56,7 @@ const create = () => {
 	$("#Modal").modal("show");
 
 	$('[name="id"]').val("");
-	$('[name="nama"]').val("");
-	$('[name="id_kategori"]').val("");
-	$('[name="kuantitas"]').val("");
-	$('[name="harga_beli"]').val("");
-	$('[name="harga_jual"]').val("");
-	$('[name="id_owner"]').val("");
+	$('[name="nama_kategori"]').val("");
 
 	$("#modal-header").html('<i class="fa fa-plus mr-2"></i> Create');
 	$("#modal-body-update-or-create").removeClass("hidden");
@@ -89,7 +66,7 @@ const create = () => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-primary");
 
-	$("#form-item").attr("action", base_url + "Produk/create");
+	$("#form-item").attr("action", base_url + "Kategori/create");
 };
 
 const update = (id) => {
@@ -103,25 +80,15 @@ const update = (id) => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-warning");
 
-	let data = data_produk.find((x) => x.id == id);
+	let data = data_kategori.find((x) => x.id == id);
 
 	var id = data.id;
-	var nama = data.nama;
-	var id_kategori = data.id_kategori;
-	var kuantitas = data.kuantitas;
-	var harga_beli = data.harga_beli;
-	var harga_jual = data.harga_jual;
-	var id_owner = data.id_owner;
+	var nama_kategori = data.nama_kategori;
 
 	$('[name="id"]').val(id);
-	$('[name="nama"]').val(nama);
-	$('[name="id_kategori"]').val(id_kategori);
-	$('[name="kuantitas"]').val(kuantitas);
-	$('[name="harga_beli"]').val(harga_beli);
-	$('[name="harga_jual"]').val(harga_jual);
-	$('[name="id_owner"]').val(id_owner);
+	$('[name="nama_kategori"]').val(nama_kategori);
 
-	$("#form-item").attr("action", base_url + "Produk/update");
+	$("#form-item").attr("action", base_url + "Kategori/update");
 };
 
 const delete_ = (id) => {
@@ -133,5 +100,5 @@ const delete_ = (id) => {
 	$("#Modal-delete #modal-button").addClass("btn-danger");
 	$("#Modal-delete #modal-button").html("Hapus");
 
-	$("#form-delete").attr("action", base_url + "Produk/delete?id=" + id);
+	$("#form-delete").attr("action", base_url + "Kategori/delete?id=" + id);
 };

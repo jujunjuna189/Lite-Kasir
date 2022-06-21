@@ -20,6 +20,7 @@ class Produk extends CI_Controller {
 
 		$data['produk'] = $this->models->Get_All('produk', $select);
 		$data['owner'] = $this->models->Get_All('owner', $select);
+		$data['kategori'] = $this->models->Get_All('kategori', $select);
 		$data['no'] = 1;
 
         $this->load->view('layouts/header');
@@ -33,6 +34,7 @@ class Produk extends CI_Controller {
 	{
 		$data = array(
 			'nama'			=>	$this->input->post('nama'),
+			'id_kategori'	=> 	$this->input->post('id_kategori'),
 			'kuantitas'		=>	$this->input->post('kuantitas'),
 			'harga_jual'	=>	$this->input->post('harga_jual'),
 			'harga_beli'	=> 	$this->input->post('harga_beli'),
@@ -48,6 +50,7 @@ class Produk extends CI_Controller {
 	{
 		$data = array(
 			'nama'			=>	$this->input->post('nama'),
+			'id_kategori'	=> 	$this->input->post('id_kategori'),
 			'kuantitas'		=>	$this->input->post('kuantitas'),
 			'harga_jual'	=>	$this->input->post('harga_jual'),
 			'harga_beli'	=> 	$this->input->post('harga_beli'),

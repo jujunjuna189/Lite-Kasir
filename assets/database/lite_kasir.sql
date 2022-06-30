@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2022 at 10:11 AM
+-- Generation Time: Jun 30, 2022 at 11:09 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -89,7 +89,8 @@ INSERT INTO `dt_penjualan` (`id`, `id_ht_penjualan`, `id_produk`, `nama_produk`,
 (6, 13, 4, 'Komputer', 2000000, 4000000, 1),
 (7, 13, 1, 'Hp', 20000, 25000, 3),
 (8, 14, 5, 'Monitor', 1500000, 2000000, 2),
-(9, 15, 1, 'Hp', 20000, 25000, 1);
+(9, 15, 1, 'Hp', 20000, 25000, 1),
+(10, 16, 7, 'Makroni Bantet', 3000, 4000, 6);
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,27 @@ INSERT INTO `ht_penjualan` (`id`, `id_customer`, `nama_customer`, `waktu`, `tota
 (12, 2, 'Jun', '2022-05-31 13:13:30', 60000, 'Admin'),
 (13, 1, 'mahasiswa', '2022-05-31 13:21:30', 4060000, 'Admin'),
 (14, 2, 'Jun', '2022-06-07 14:13:52', 4000000, 'Admin'),
-(15, 2, 'Jun', '2022-06-07 14:51:36', 25000, 'Admin');
+(15, 2, 'Jun', '2022-06-07 14:51:36', 25000, 'Admin'),
+(16, 2, 'Jun', '2022-06-21 16:58:39', 24000, 'Admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `id` bigint(11) NOT NULL,
+  `nama_kategori` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id`, `nama_kategori`) VALUES
+(1, 'Makanan'),
+(3, 'Minuman');
 
 -- --------------------------------------------------------
 
@@ -185,6 +206,7 @@ CREATE TABLE `penjualan` (
 CREATE TABLE `produk` (
   `id` bigint(11) NOT NULL,
   `id_owner` bigint(11) NOT NULL,
+  `id_kategori` bigint(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `kuantitas` int(3) NOT NULL,
   `harga_jual` float NOT NULL,
@@ -195,10 +217,11 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id`, `id_owner`, `nama`, `kuantitas`, `harga_jual`, `harga_beli`) VALUES
-(1, 1, 'Hp', 43, 25000, 20000),
-(4, 3, 'Komputer', 60, 4000000, 2000000),
-(5, 5, 'Monitor', 48, 2000000, 1500000);
+INSERT INTO `produk` (`id`, `id_owner`, `id_kategori`, `nama`, `kuantitas`, `harga_jual`, `harga_beli`) VALUES
+(1, 1, 1, 'Hp', 43, 25000, 20000),
+(4, 3, 1, 'Komputer', 60, 4000000, 2000000),
+(5, 5, 3, 'Monitor', 48, 2000000, 1500000),
+(7, 5, 3, 'Makroni Bantet', 28, 4000, 3000);
 
 -- --------------------------------------------------------
 
@@ -277,6 +300,12 @@ ALTER TABLE `ht_penjualan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `owner`
 --
 ALTER TABLE `owner`
@@ -326,7 +355,7 @@ ALTER TABLE `dt_pembelian`
 -- AUTO_INCREMENT for table `dt_penjualan`
 --
 ALTER TABLE `dt_penjualan`
-  MODIFY `id` bigint(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ht_pembelian`
@@ -338,7 +367,13 @@ ALTER TABLE `ht_pembelian`
 -- AUTO_INCREMENT for table `ht_penjualan`
 --
 ALTER TABLE `ht_penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `owner`
@@ -356,7 +391,7 @@ ALTER TABLE `penjualan`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `supplier`

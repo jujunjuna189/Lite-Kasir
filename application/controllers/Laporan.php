@@ -195,7 +195,7 @@ class Laporan extends CI_Controller {
         $this->load->view('layouts/header');
         $this->load->view('layouts/navbar', $data);
         $this->load->view('layouts/sidebar');
-		$this->load->view('report/laporan_produk_re/index', $data);
+		$this->load->view('report/laporan_saldo_priode/index', $data);
         $this->load->view('layouts/footer', $footer);
     }
 
@@ -247,5 +247,37 @@ class Laporan extends CI_Controller {
         $this->load->view('layouts/sidebar');
 		$this->load->view('report/laporan_pembelian_supplier/index', $data);
         $this->load->view('layouts/footer', $footer);
+    }
+
+    // Laporan transaksi pembelian supplier
+    public function report_transaksi_pembelian_supplier()
+    {
+        $start_date = $this->input->post('start_date');
+        $end_date = $this->input->post('end_date');
+        $id_supplier = $this->input->post('id_supplier');
+        // Header
+        $header['auth_big_page'] = true;
+        // Footer
+        $footer['script_loader'] = '';
+        // transaksi
+        $data['title_page'] = $this->title . " Penjualan Owner";
+        $laporan = $this->getLaporanGeneral($start_date, $end_date, $id_owner);
+		$data['laporan'] = $laporan;
+		$data['no'] = 1;
+        $data['table'] = [
+            'nama_produk' => true,
+            'penjualan' => true,
+            'qty' => true,
+            'harga_jual' => true,
+            'harga_beli' => true,
+            'total_harga_beli' => true,
+            'margin_percent' => true,
+            'margin' => true,
+            'total_margin' => true,
+        ];
+
+        $this->load->view('layouts/auth/header', $header);
+		$this->load->view('report/laporan_owner/report', $data);
+        $this->load->view('layouts/auth/footer');
     }
 }

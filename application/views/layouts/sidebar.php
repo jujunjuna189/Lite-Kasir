@@ -140,9 +140,21 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= base_url('Laporan/report_pembelian_supplier') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pembelian Per Supplier</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="pages/layout/top-nav.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Laporan per priode</p>
+                                <p>Pembelian All Supplier</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/layout/top-nav.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Piutang Karyawan</p>
                             </a>
                         </li>
                         <li class="nav-item">

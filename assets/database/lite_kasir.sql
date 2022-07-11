@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 11:09 AM
+-- Generation Time: Jul 11, 2022 at 12:50 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -29,16 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customer` (
   `id` bigint(20) NOT NULL,
-  `nama_customer` varchar(255) NOT NULL
+  `nama_customer` varchar(255) NOT NULL,
+  `status` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `nama_customer`) VALUES
-(1, 'mahasiswa'),
-(2, 'Jun');
+INSERT INTO `customer` (`id`, `nama_customer`, `status`) VALUES
+(1, 'mahasiswa', NULL),
+(2, 'Jun', 'Mahasiswa');
 
 -- --------------------------------------------------------
 
@@ -168,18 +169,19 @@ INSERT INTO `kategori` (`id`, `nama_kategori`) VALUES
 CREATE TABLE `owner` (
   `id` bigint(11) NOT NULL,
   `nama_owner` varchar(50) NOT NULL,
-  `no_hp` varchar(13) NOT NULL
+  `no_hp` varchar(13) NOT NULL,
+  `alamat` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `owner`
 --
 
-INSERT INTO `owner` (`id`, `nama_owner`, `no_hp`) VALUES
-(1, 'Mahasiswa', '081297551925'),
-(3, 'Ujun', '081297551925'),
-(4, 'Junas Owner', '081297551925'),
-(5, 'RE', '081297551925');
+INSERT INTO `owner` (`id`, `nama_owner`, `no_hp`, `alamat`) VALUES
+(1, 'Mahasiswa', '081297551925', ''),
+(3, 'Ujun', '081297551925', ''),
+(4, 'Junas Owner', '081297551925', ''),
+(5, 'RE', '081297551925', '');
 
 -- --------------------------------------------------------
 
@@ -232,16 +234,17 @@ INSERT INTO `produk` (`id`, `id_owner`, `id_kategori`, `nama`, `kuantitas`, `har
 CREATE TABLE `supplier` (
   `id` bigint(20) NOT NULL,
   `nama_supplier` varchar(50) DEFAULT NULL,
-  `no_hp` varchar(13) DEFAULT NULL
+  `no_hp` varchar(13) DEFAULT NULL,
+  `alamat` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `supplier`
 --
 
-INSERT INTO `supplier` (`id`, `nama_supplier`, `no_hp`) VALUES
-(1, 'Junas', '081297551925'),
-(2, 'Ragils', '081297551925');
+INSERT INTO `supplier` (`id`, `nama_supplier`, `no_hp`, `alamat`) VALUES
+(1, 'Junas', '081297551925', ''),
+(2, 'Ragils', '081297551925', '');
 
 -- --------------------------------------------------------
 
@@ -343,43 +346,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `dt_pembelian`
 --
 ALTER TABLE `dt_pembelian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `dt_penjualan`
 --
 ALTER TABLE `dt_penjualan`
-  MODIFY `id` bigint(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ht_pembelian`
 --
 ALTER TABLE `ht_pembelian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ht_penjualan`
 --
 ALTER TABLE `ht_penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `owner`
 --
 ALTER TABLE `owner`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
@@ -391,13 +394,13 @@ ALTER TABLE `penjualan`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

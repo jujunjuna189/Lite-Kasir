@@ -33,14 +33,14 @@ $(document).ready(function () {
 		var kuantitas = $(this).data("kuantitas");
 		var harga_jual = $(this).data("harga_jual");
 		var harga_beli = $(this).data("harga_beli");
-		var id_owner = $(this).data("id_owner");
+		var id_customer = $(this).data("id_customer");
 
 		$('[name="id"]').val(id);
 		$('[name="nama"]').val(nama);
 		$('[name="kuantitas"]').val(kuantitas);
 		$('[name="harga_jual"]').val(harga_jual);
 		$('[name="harga_beli"]').val(harga_beli);
-		$('[name="id_owner"]').val(id_owner);
+		$('[name="id_customer"]').val(id_customer);
 
 		document.form.action = "<?php echo base_url(); ?>Kasir/Create1";
 	});
@@ -56,9 +56,8 @@ const create = () => {
 	$("#Modal").modal("show");
 
 	$('[name="id"]').val("");
-	$('[name="nama_owner"]').val("");
-	$('[name="no_hp"]').val("");
-	$('[name="alamat"]').val("");
+	$('[name="nama_customer"]').val("");
+	$('[name="status"]').val("");
 
 	$("#modal-header").html('<i class="fa fa-plus mr-2"></i> Create');
 	$("#modal-body-update-or-create").removeClass("hidden");
@@ -68,7 +67,7 @@ const create = () => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-primary");
 
-	$("#form-item").attr("action", base_url + "Owner/create");
+	$("#form-item").attr("action", base_url + "Customer/create");
 };
 
 const update = (id) => {
@@ -82,19 +81,17 @@ const update = (id) => {
 	remove_color_btn();
 	$("#modal-button").addClass("btn-warning");
 
-	let data = data_owner.find((x) => x.id == id);
+	let data = data_customer.find((x) => x.id == id);
 
 	var id = data.id;
-	var nama_owner = data.nama_owner;
-	var no_hp = data.no_hp;
-	var alamat = data.alamat;
+	var nama_customer = data.nama_customer;
+	var status = data.status;
 
 	$('[name="id"]').val(id);
-	$('[name="nama_owner"]').val(nama_owner);
-	$('[name="no_hp"]').val(no_hp);
-	$('[name="alamat"]').val(alamat);
+	$('[name="nama_customer"]').val(nama_customer);
+	$('[name="status"]').val(status);
 
-	$("#form-item").attr("action", base_url + "Owner/update");
+	$("#form-item").attr("action", base_url + "Customer/update");
 };
 
 const delete_ = (id) => {
@@ -106,5 +103,5 @@ const delete_ = (id) => {
 	$("#Modal-delete #modal-button").addClass("btn-danger");
 	$("#Modal-delete #modal-button").html("Hapus");
 
-	$("#form-delete").attr("action", base_url + "Owner/delete?id=" + id);
+	$("#form-delete").attr("action", base_url + "Customer/delete?id=" + id);
 };

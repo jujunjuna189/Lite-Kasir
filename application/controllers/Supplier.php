@@ -35,6 +35,7 @@ class Supplier extends CI_Controller {
 		$data = array(
 			'nama_supplier'	=>	$this->input->post('nama_supplier'),
 			'no_hp'		=>	$this->input->post('no_hp'),
+			'alamat'		=>	$this->input->post('alamat'),
 		);
 
 		$this->models->Save($data, 'supplier');
@@ -47,6 +48,7 @@ class Supplier extends CI_Controller {
 		$data = array(
 			'nama_supplier'	=>	$this->input->post('nama_supplier'),
 			'no_hp'		=>	$this->input->post('no_hp'),
+			'alamat'		=>	$this->input->post('alamat'),
 		);
 
 		$where['id'] = $this->input->post('id');

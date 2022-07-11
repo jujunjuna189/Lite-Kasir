@@ -5,7 +5,12 @@
                 <div class="float-left">
                     <h3 class="card-title">DataTable with default features</h3>
                 </div>
-                <div class="float-right">
+                <div class="float-right d-flex">
+                    <div class="mr-3 d-flex align-items-center">
+                        <span class="mr-3">Dari</span> <input type="date" name="start_date" id="start_date" class="form-control">
+                        <span class="mx-3">Dari</span> <input type="date" name="end_date" id="end_date" class="form-control">
+                        <button class="btn btn-primary mx-2" id="btn-filter" onclick="filter()">Filter</button>
+                    </div>
                     <button class="btn btn-primary" id="btn-create" onclick="create()"><i class="fa fa-plus mr-2"></i>Create</button>
                 </div>
             </div>

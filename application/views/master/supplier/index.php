@@ -17,6 +17,7 @@
                             <th>NO</th>
                             <th>Nama Supplier</th>
                             <th>No Hp</th>
+                            <th>Alamat</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -26,6 +27,7 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $val->nama_supplier ?></td>
                                 <td><?= $val->no_hp ?></td>
+                                <td><?= $val->alamat ?></td>
                                 <td>
                                     <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
                                     <span class="badge badge-danger py-2 cursor-pointer" onclick="delete_('<?= $val->id ?>')"><i class="fas fa-trash"></i> Delete</span>
@@ -58,6 +60,10 @@
                         <div class="form-group">
                             <small><strong>No Telepon</strong></small>
                             <input type="text" name="no_hp" class="form-control" required placeholder="No Telepon">
+                        </div>
+                        <div class="form-group">
+                            <small><strong>alamat</strong></small>
+                            <textarea name="alamat" id="alamat" cols="30" rows="3" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>

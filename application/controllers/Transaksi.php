@@ -21,8 +21,15 @@ class Transaksi extends CI_Controller {
         // transaksi
 		$select = $this->db->select('*');
 
+        // if(isset($_POST)){
+        //     $this->db->where('ht_penjualan.waktu >=', $this->input->post('start_date'));
+        //     $this->db->where('ht_penjualan.waktu <=', $this->input->post('end_date'));
+        // }
+
+        $transaksi = $this->models->Get_All('ht_penjualan', $select);
+
         $header['title_page'] = $this->title;
-		$data['transaksi'] = $this->models->Get_All('ht_penjualan', $select);
+		$data['transaksi'] = $transaksi;
         $data['customer'] = $this->models->Get_All('customer', $select);
         $data['produk'] = $this->models->Get_All('produk', $select);
 		$data['no'] = 1;

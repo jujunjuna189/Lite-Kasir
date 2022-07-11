@@ -34,7 +34,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?= base_url('Kasir/index') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -47,6 +47,14 @@
                         <i class="fas fa-angle-left right"></i>
                     </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url() ?>Customer" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Customer</p>
+                            </a>
+                        </li>
+                    </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?= base_url() ?>Owner" class="nav-link">
@@ -146,13 +154,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="<?= base_url('Laporan/report_pembelian_all_supplier') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pembelian All Supplier</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="<?= base_url('Laporan/report_piutang_karyawan') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Piutang Karyawan</p>
                             </a>

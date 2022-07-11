@@ -58,6 +58,7 @@ const create = () => {
 	$('[name="id"]').val("");
 	$('[name="nama_supplier"]').val("");
 	$('[name="no_hp"]').val("");
+	$('[name="alamat"]').val("");
 
 	$("#modal-header").html('<i class="fa fa-plus mr-2"></i> Create');
 	$("#modal-body-update-or-create").removeClass("hidden");
@@ -86,10 +87,12 @@ const update = (id) => {
 	var id = data.id;
 	var nama_supplier = data.nama_supplier;
 	var no_hp = data.no_hp;
+	var alamat = data.alamat;
 
 	$('[name="id"]').val(id);
 	$('[name="nama_supplier"]').val(nama_supplier);
 	$('[name="no_hp"]').val(no_hp);
+	$('[name="alamat"]').val(alamat);
 
 	$("#form-item").attr("action", base_url + "Supplier/update");
 };

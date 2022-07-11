@@ -15,19 +15,17 @@
                     <thead>
                         <tr>
                             <th>NO</th>
-                            <th>Nama Owner</th>
-                            <th>No Hp</th>
-                            <th>Alamat</th>
+                            <th>Nama Customer</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($owner as $val) { ?>
+                        <?php foreach ($customer as $val) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $val->nama_owner ?></td>
-                                <td><?= $val->no_hp ?></td>
-                                <td><?= $val->alamat ?></td>
+                                <td><?= $val->nama_customer ?></td>
+                                <td><?= $val->status ?></td>
                                 <td>
                                     <span class="badge badge-warning py-2 cursor-pointer" onclick="update('<?= $val->id ?>')"><i class="fas fa-pen"></i> Update</span>
                                     <span class="badge badge-danger py-2 cursor-pointer" onclick="delete_('<?= $val->id ?>')"><i class="fas fa-trash"></i> Delete</span>
@@ -54,16 +52,14 @@
                     <input type="hidden" name="id">
                     <div id="modal-body-update-or-create">
                         <div class="form-group">
-                            <small><strong>Nama Owner</strong></small>
-                            <input type="text" name="nama_owner" class="form-control" required placeholder="Nama Owner">
+                            <small><strong>Nama Customer</strong></small>
+                            <input type="text" name="nama_customer" class="form-control" required placeholder="Nama Customer">
                         </div>
+                    </div>
+                    <div id="modal-body-update-or-create">
                         <div class="form-group">
-                            <small><strong>No Telepon</strong></small>
-                            <input type="text" name="no_hp" class="form-control" required placeholder="No Telepon">
-                        </div>
-                        <div class="form-group">
-                            <small><strong>alamat</strong></small>
-                            <textarea name="alamat" id="alamat" cols="30" rows="3" class="form-control"></textarea>
+                            <small><strong>Status</strong></small>
+                            <input type="text" name="status" class="form-control" required placeholder="status">
                         </div>
                     </div>
                 </div>
@@ -102,5 +98,5 @@
 
 <!-- Data send to javascript -->
 <script>
-    let data_owner = <?= json_encode($owner) ?>;
+    let data_customer = <?= json_encode($customer) ?>;
 </script>

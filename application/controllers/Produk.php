@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Produk extends CI_Controller {
+	private $title = 'Produk';
 
     public function __construct()
     {
@@ -18,13 +19,14 @@ class Produk extends CI_Controller {
         // Produk
 		$select = $this->db->select('*');
 
+		$data['title_page'] = $this->title;
 		$data['produk'] = $this->models->Get_All('produk', $select);
 		$data['owner'] = $this->models->Get_All('owner', $select);
 		$data['kategori'] = $this->models->Get_All('kategori', $select);
 		$data['no'] = 1;
 
         $this->load->view('layouts/header');
-        $this->load->view('layouts/navbar');
+        $this->load->view('layouts/navbar', $data);
         $this->load->view('layouts/sidebar');
 		$this->load->view('master/produk/index', $data);
         $this->load->view('layouts/footer', $footer);

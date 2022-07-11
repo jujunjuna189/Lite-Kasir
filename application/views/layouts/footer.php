@@ -74,5 +74,50 @@
 </script>
 <!-- Custom JS -->
 <?= isset($script_loader) ? $script_loader : '' ?>
+
+<script>
+      $(function () {
+        var areaChartData = {
+          labels: [
+            "Pembelian",
+            "Penjualan",
+            "Laba",
+          ],
+          datasets: [
+            {
+              label: "Digital Goods",
+              backgroundColor: "rgba(60,141,188,0.9)",
+              borderColor: "rgba(60,141,188,0.8)",
+              pointRadius: false,
+              pointColor: "#3b8bba",
+              pointStrokeColor: "rgba(60,141,188,1)",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(60,141,188,1)",
+              data: [penjualan, pembelian, laba, 0],
+            }
+          ],
+        };
+        //-------------
+        //- BAR CHART -
+        //-------------
+        var barChartCanvas = $("#barChart").get(0);
+        var barChartData = $.extend(true, {}, areaChartData);
+        var temp0 = areaChartData.datasets[0];
+        barChartData.datasets[0] = temp0;
+
+        var barChartOptions = {
+          responsive: true,
+          maintainAspectRatio: false,
+          datasetFill: false,
+        };
+
+        new Chart(barChartCanvas, {
+          type: "bar",
+          data: barChartData,
+          options: barChartOptions,
+        });
+
+      });
+    </script>
 </body>
 </html>

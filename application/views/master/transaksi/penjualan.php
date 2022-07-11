@@ -6,13 +6,13 @@
                     <h3 class="card-title">DataTable with default features</h3>
                 </div>
                 <div class="float-right d-flex">
-                        <form action="<?= base_url('Transaksi/penjualan') ?>" method="post">
-                            <div class="mr-3 d-flex align-items-center">
-                                <span class="mr-3">Dari</span> <input type="date" name="start_date" id="start_date" class="form-control">
-                                <span class="mx-3">Dari</span> <input type="date" name="end_date" id="end_date" class="form-control">
-                                <button type="submit" class="btn btn-primary mx-2" id="btn-filter">Filter</button>
-                            </div>
-                        </form>
+                    <form action="<?= base_url('Transaksi/penjualan') ?>" method="get">
+                        <div class="mr-3 d-flex align-items-center">
+                            <span class="mr-3">Dari</span> <input type="date" name="start_date" id="start_date" class="form-control">
+                            <span class="mx-3">Dari</span> <input type="date" name="end_date" id="end_date" class="form-control">
+                            <button type="submit" class="btn btn-primary mx-2" id="btn-filter">Filter</button>
+                        </div>
+                    </form>
                     <button class="btn btn-primary" id="btn-create" onclick="create()"><i class="fa fa-plus mr-2"></i>Create</button>
                 </div>
             </div>
@@ -66,8 +66,8 @@
                         <small><strong>Customer</strong></small>
                         <select class="form-control select2" name="customer" style="width: 100%;">
                             <option value="" selected disabled>Pilih</option>
-                            <?php foreach($customer as $val) : ?>
-                            <option value="<?= $val->id ?>"><?= $val->nama_customer ?></option>
+                            <?php foreach ($customer as $val) : ?>
+                                <option value="<?= $val->id ?>"><?= $val->nama_customer ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
@@ -75,8 +75,8 @@
                         <small><strong>Produk</strong></small>
                         <select class="form-control select2" name="produk" style="width: 100%;">
                             <option value="" selected disabled>Pilih</option>
-                            <?php foreach($produk as $val){ ?>
-                            <option value="<?= $val->id ?>"><?= $val->nama ?></option>
+                            <?php foreach ($produk as $val) { ?>
+                                <option value="<?= $val->id ?>"><?= $val->nama ?></option>
                             <?php } ?>
                         </select>
                     </div>

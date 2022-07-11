@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaksi extends CI_Controller {
+class Transaksi extends CI_Controller
+{
 
     private $title = 'Penjualan';
     private $titleReport = 'Laporan Transaksi';
@@ -12,34 +13,34 @@ class Transaksi extends CI_Controller {
         $this->load->model('Models', 'models');
         $this->load->model('GlobalModel', 'globalModel');
     }
-	
-	public function penjualan()
-	{
+
+    public function penjualan()
+    {
         // Footer
-        $footer['script_loader'] = '<script src="'. base_url() .'assets/customjs/penjualan.js"></script>';
+        $footer['script_loader'] = '<script src="' . base_url() . 'assets/customjs/penjualan.js"></script>';
 
         // transaksi
-		$select = $this->db->select('*');
+        $select = $this->db->select('*');
 
-        // if(isset($_POST)){
-        //     $this->db->where('ht_penjualan.waktu >=', $this->input->post('start_date'));
-        //     $this->db->where('ht_penjualan.waktu <=', $this->input->post('end_date'));
-        // }
+        if ($this->input->get('start_date') != '') {
+            $this->db->where('ht_penjualan.waktu >=', $this->input->get('start_date'));
+            $this->db->where('ht_penjualan.waktu <=', $this->input->get('end_date'));
+        }
 
         $transaksi = $this->models->Get_All('ht_penjualan', $select);
 
         $header['title_page'] = $this->title;
-		$data['transaksi'] = $transaksi;
+        $data['transaksi'] = $transaksi;
         $data['customer'] = $this->models->Get_All('customer', $select);
         $data['produk'] = $this->models->Get_All('produk', $select);
-		$data['no'] = 1;
+        $data['no'] = 1;
 
         $this->load->view('layouts/header');
         $this->load->view('layouts/navbar', $header);
         $this->load->view('layouts/sidebar');
-		$this->load->view('master/transaksi/penjualan', $data);
+        $this->load->view('master/transaksi/penjualan', $data);
         $this->load->view('layouts/footer', $footer);
-	}
+    }
 
     public function create()
     {
@@ -63,7 +64,7 @@ class Transaksi extends CI_Controller {
         $ht_id = $lastData->id;
 
         $data = [];
-        for($i = 0; $i < $lengthData; $i++){
+        for ($i = 0; $i < $lengthData; $i++) {
             $data[] = [
                 'id_ht_penjualan' => $ht_id,
                 'id_produk' => $result[$i]['id'],
@@ -79,7 +80,7 @@ class Transaksi extends CI_Controller {
             $minProduk = $produk[0]->kuantitas - $result[$i]['qty'];
             $dataProduk['kuantitas'] = $minProduk;
             $where['id'] = $result[$i]['id'];
-		    $this->models->Update($where, $dataProduk, 'produk');
+            $this->models->Update($where, $dataProduk, 'produk');
         }
 
         $this->models->saveBatch($data, 'dt_penjualan');
@@ -90,7 +91,7 @@ class Transaksi extends CI_Controller {
         $id = $this->input->get('id');
         // get dt_penjualan
         $resultDtPenjualan = $this->models->Get_Where(['id_ht_penjualan' => $id], 'dt_penjualan');
-        foreach($resultDtPenjualan as $value){
+        foreach ($resultDtPenjualan as $value) {
             echo json_encode($value->kuantitas);
             // Firt data
             $qty = $value->kuantitas;
@@ -117,12 +118,12 @@ class Transaksi extends CI_Controller {
         $header['auth_big_page'] = true;
         // transaksi
         $data['title_page'] = $this->titleReport;
-		$data['ht_penjualan'] = $this->models->Get_Where(['id' => $id], 'ht_penjualan');
+        $data['ht_penjualan'] = $this->models->Get_Where(['id' => $id], 'ht_penjualan');
         $data['dt_penjualan'] = $this->models->Get_Where(['id_ht_penjualan' => $id], 'dt_penjualan');
-		$data['no'] = 1;
+        $data['no'] = 1;
 
         $this->load->view('layouts/auth/header', $header);
-		$this->load->view('report/transaksi/index', $data);
+        $this->load->view('report/transaksi/index', $data);
         $this->load->view('layouts/auth/footer');
     }
 
@@ -135,21 +136,28 @@ class Transaksi extends CI_Controller {
     public function pembelian()
     {
         // Footer
-        $footer['script_loader'] = '<script src="'. base_url() .'assets/customjs/pembelian.js"></script>';
+        $footer['script_loader'] = '<script src="' . base_url() . 'assets/customjs/pembelian.js"></script>';
 
         // transaksi
-		$select = $this->db->select('*');
+        $select = $this->db->select('*');
+
+        if ($this->input->get('start_date') != '') {
+            $this->db->where('ht_pembelian.waktu >=', $this->input->get('start_date'));
+            $this->db->where('ht_pembelian.waktu <=', $this->input->get('end_date'));
+        }
+
+        $transaksi = $this->models->Get_All('ht_pembelian', $select);
 
         $header['title_page'] = $this->titlePembelian;
-		$data['transaksi'] = $this->models->Get_All('ht_pembelian', $select);
+        $data['transaksi'] = $transaksi;
         $data['supplier'] = $this->models->Get_All('supplier', $select);
         $data['produk'] = $this->models->Get_All('produk', $select);
-		$data['no'] = 1;
+        $data['no'] = 1;
 
         $this->load->view('layouts/header');
         $this->load->view('layouts/navbar', $header);
         $this->load->view('layouts/sidebar');
-		$this->load->view('master/transaksi/pembelian', $data);
+        $this->load->view('master/transaksi/pembelian', $data);
         $this->load->view('layouts/footer', $footer);
     }
 
@@ -174,7 +182,7 @@ class Transaksi extends CI_Controller {
         $ht_id = $lastData->id;
 
         $data = [];
-        for($i = 0; $i < $lengthData; $i++){
+        for ($i = 0; $i < $lengthData; $i++) {
             $data[] = [
                 'id_ht_pembelian' => $ht_id,
                 'id_produk' => $result[$i]['id'],
@@ -190,7 +198,7 @@ class Transaksi extends CI_Controller {
             $minProduk = $produk[0]->kuantitas + $result[$i]['qty'];
             $dataProduk['kuantitas'] = $minProduk;
             $where['id'] = $result[$i]['id'];
-		    $this->models->Update($where, $dataProduk, 'produk');
+            $this->models->Update($where, $dataProduk, 'produk');
         }
 
         $this->models->saveBatch($data, 'dt_pembelian');
@@ -201,7 +209,7 @@ class Transaksi extends CI_Controller {
         $id = $this->input->get('id');
         // get dt_pembelian
         $resultDtPembelian = $this->models->Get_Where(['id_ht_pembelian' => $id], 'dt_pembelian');
-        foreach($resultDtPembelian as $value){
+        foreach ($resultDtPembelian as $value) {
             echo json_encode($value->kuantitas);
             // Firt data
             $qty = $value->kuantitas;
